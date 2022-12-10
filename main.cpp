@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
       buffer = "";
     } else {
       buffer = buffer + samplecode[i];
-      cout << buffer << endl;
+      if (isDebug) cout << buffer << endl;
     }
   }
   cout << codelist.size() << endl;
