@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) {
   }
 
   // Interpret the code in the file
-  interpret(codelist);
+  interpret(codelist, isDebug);
 
   return 0;
 }

@@ -1,8 +1,5 @@
-#include <iostream>
-#include <string>
 #include <vector>
-using namespace std;
-
-// Declaration of the interpret function
-void interpret(const vector<string> &codelist);
+#include <string>
+// Function prototype for the interpret function
+void interpret(const std::vector<std::string> &code_lines, const bool is_debug);
 

@@ -1,61 +1,66 @@
+#include "parse_file.h"
+#include <algorithm>
+#include <fstream>
 #include <iostream>
+#include <map>
+#include <sstream>
 #include <string>
 #include <vector>
-#include <unordered_map>
-#include <sstream>
 using namespace std;
 
-vector<string> split(const string &str);
+void interpret(const vector<string> &code_lines, const bool is_debug) {
+  // Create a map to store variables and their values
+  map<string, string> variables{};
 
-// Definition of the interpret function
-void interpret(const vector<string> &codelist) {
-  // Store variables in a map
-  unordered_map<string, int> variables;
+  // Iterate over each line of code
+  for (const string &line : code_lines) {
+    // Split the line into tokens
+    vector<string> tokens{};
+    string token{};
+    stringstream ss{line};
+    while (ss >> token) {
+      tokens.push_back(token);
+    }
 
-  // Iterate over the lines of code
-  for (const auto &line : codelist) {
-    // Split the line into tokens by space
-    vector<string> tokens = split(line);
-
-    // Handle the `let` command
+    // Check the first token to determine the command
     if (tokens[0] == "let") {
-      // Get the name and value of the variable
-      string name = tokens[1];
-      int value = stoi(tokens[3]);
+      // Handle the "let" command
+      if (tokens.size() != 3) {
+        // Invalid number of tokens for the "let" command
+        cerr << "Error: Invalid number of tokens for 'let' command" << endl;
+        continue;
+      }
 
-      // Set the value of the variable
-      variables[name] = value;
-    }
+      // Store the variable and its value in the map
+      variables[tokens[1]] = tokens[2];
+    } else if (tokens[0] == "print") {
+      // Handle the "print" command
+      if (tokens.size() != 2) {
+        // Invalid number of tokens for the "print" command
+        cerr << "Error: Invalid number of tokens for 'print' command" << endl;
+        continue;
+      }
 
-    // Handle the `print` command
-    else if (tokens[0] == "print") {
-      // Get the name of the variable to print
-      string name = tokens[1];
+      // Look up the variable in the map and print its value
+      if (variables.count(tokens[1]) > 0) {
+        cout << variables[tokens[1]] << endl;
+      } else {
+        // Variable not found
+        cerr << "Error: Variable '" << tokens[1] << "' not found" << endl;
+      }
+    } else if (tokens[0] == "end") {
+      // Handle the "end" command
+      if (tokens.size() != 1) {
+        // Invalid number of tokens for the "end" command
+        cerr << "Error: Invalid number of tokens for 'end' command" << endl;
+        continue;
+      }
 
-      // Print the value of the variable
-      cout << variables[name] << endl;
-    }
-
-    // Handle the `end` command
-    else if (tokens[0] == "end") {
-      // End the interpreter
+      // Stop interpreting the code
       break;
-    }
-
-    // Handle unknown commands
-    else {
+    } else {
+      // Unknown command
       cerr << "Error: Unknown command '" << tokens[0] << "'" << endl;
     }
   }
-}
-
-// Helper function to split a string into tokens by space
-vector<string> split(const string &str) {
-  vector<string> tokens;
-  string token;
-  istringstream iss(str);
-  while (getline(iss, token, ' ')) {
-    tokens.push_back(token);
-  }
-  return tokens;
 }
