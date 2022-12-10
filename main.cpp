@@ -11,10 +11,16 @@ void listelement(const vector<string> &vec, string sep = " ", bool debug = false
   if (debug) cout << endl;
 }
 
-
-
 int main(int argc, char *argv[]) {
-  bool isDebug = argc > 1 ? true : false;
+  // Check if the "--debug" flag was provided
+  bool isDebug = false;
+  for (int i = 0; i < argc; i++) {
+    if (string(argv[i]) == "--debug") {
+      isDebug = true;
+      break;
+    }
+  }
+
   // Sample debug code
   string samplecode = "VAR X = 0;PRINT X;";
   vector<string> codelist{};
@@ -32,3 +38,4 @@ int main(int argc, char *argv[]) {
   listelement(codelist, ", ", isDebug);
   return 0;
 }
+
