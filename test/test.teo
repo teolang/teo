@@ -1,2 +1,4 @@
-VAR X = 0;
-PRINT X;
+let x = 5;
+print x;
+end;
+

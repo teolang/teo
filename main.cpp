@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 #include "parse_file.h" // include the header file for the parse_file function
-#include "listelement.h" // include the header file for the listelement function
+#include "interpret.h" // include the header file for the interpret function
 using namespace std;
 
 int main(int argc, char *argv[]) {
@@ -23,9 +23,8 @@ int main(int argc, char *argv[]) {
     return 1;
   }
 
-  cout << codelist.size() << endl;
-  listelement(codelist, ", ", isDebug); // call the listelement function
+  // Interpret the code in the file
+  interpret(codelist);
 
   return 0;
 }
-

@@ -1,7 +1,8 @@
+#include <algorithm>
+#include <fstream>
 #include <iostream>
 #include <string>
 #include <vector>
-#include <fstream>
 using namespace std;
 
 // Definition of the parse_file function
@@ -26,8 +27,16 @@ vector<string> parse_file(int argc, char *argv[], bool isDebug) {
               buffer = "";
             } else {
               buffer = buffer + samplecode[i];
-              if (isDebug) cout << buffer << endl;
+              if (isDebug)
+                cout << buffer << endl;
             }
+          }
+          // Remove escape character from new line
+          for (auto &line : codelist) {
+            line.erase(remove(line.begin(), line.end(), '\\'), line.end());
+          }
+          for (auto &line : codelist) {
+            line.erase(remove(line.begin(), line.end(), '\n'), line.end());
           }
         } else {
           // Failed to open the file
@@ -44,9 +53,10 @@ vector<string> parse_file(int argc, char *argv[], bool isDebug) {
 
   if (!fileSpecified) {
     // The "--file" flag was not provided
-    cerr << "Error: No file specified. Use the '--file' flag to specify a file to parse." << endl;
+    cerr << "Error: No file specified. Use the '--file' flag to specify a file "
+            "to parse."
+         << endl;
   }
 
   return codelist;
 }
-
