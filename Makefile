@@ -1,7 +1,7 @@
 all: main
 
 main: main.cpp
-	clang++ main.cpp -o main
+	clang++ main.cpp parse_file.cpp listelement.cpp -o main
 
 run: main
 	./main --file test/test.teo
