@@ -37,9 +37,7 @@ void interpret(const std::vector<std::string> &code_lines,
       }
     }
     // Increment the current_line variable unless it was set by the tok_goto function
-    if (current_line == 0) {
       current_line++;
-    }
   }
 }
 
