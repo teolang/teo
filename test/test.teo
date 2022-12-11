@@ -1,3 +1,4 @@
 let x 5;
 print x;
+goto 1;
 end;
