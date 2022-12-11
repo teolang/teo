@@ -1,10 +1,11 @@
-all: main
+all: clean main run
 
-main: main.cpp parse_file.cpp interpret.cpp
+main: $(wildcard $(SRC_DIR)/*.cpp,h)
 	clang++ main.cpp parse_file.cpp interpret.cpp -o main
 
-run: main
-	./main --file test/test.teo
+
+run: main test/test.teo
+	./main --file test/test.teo --debug
 
 clean:
 	rm -f main

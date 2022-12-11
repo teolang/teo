@@ -1,66 +1,48 @@
-#include "parse_file.h"
+// interpret.cpp
+
 #include <algorithm>
-#include <fstream>
 #include <iostream>
 #include <map>
-#include <sstream>
 #include <string>
 #include <vector>
-using namespace std;
 
-void interpret(const vector<string> &code_lines, const bool is_debug) {
-  // Create a map to store variables and their values
-  map<string, string> variables{};
+#include "end.cpp"
+#include "goto.cpp"
+#include "let.cpp"
+#include "print.cpp"
 
-  // Iterate over each line of code
-  for (const string &line : code_lines) {
-    // Split the line into tokens
-    vector<string> tokens{};
-    string token{};
-    stringstream ss{line};
-    while (ss >> token) {
-      tokens.push_back(token);
-    }
-
-    // Check the first token to determine the command
-    if (tokens[0] == "let") {
-      // Handle the "let" command
-      if (tokens.size() != 3) {
-        // Invalid number of tokens for the "let" command
-        cerr << "Error: Invalid number of tokens for 'let' command" << endl;
-        continue;
-      }
-
-      // Store the variable and its value in the map
-      variables[tokens[1]] = tokens[2];
-    } else if (tokens[0] == "print") {
-      // Handle the "print" command
-      if (tokens.size() != 2) {
-        // Invalid number of tokens for the "print" command
-        cerr << "Error: Invalid number of tokens for 'print' command" << endl;
-        continue;
-      }
-
-      // Look up the variable in the map and print its value
-      if (variables.count(tokens[1]) > 0) {
-        cout << variables[tokens[1]] << endl;
-      } else {
-        // Variable not found
-        cerr << "Error: Variable '" << tokens[1] << "' not found" << endl;
-      }
-    } else if (tokens[0] == "end") {
-      // Handle the "end" command
-      if (tokens.size() != 1) {
-        // Invalid number of tokens for the "end" command
-        cerr << "Error: Invalid number of tokens for 'end' command" << endl;
-        continue;
-      }
-
-      // Stop interpreting the code
-      break;
+// Definition of the interpret function
+void interpret(const std::vector<std::string> &code_lines,
+               const bool is_debug) {
+  std::map<std::string, int> vars{};
+  int current_line = 0;
+  bool gotoed = false;
+  while (current_line < code_lines.size()) {
+    gotoed = false;
+    const auto &line = code_lines[current_line];
+    if (line.find("let ") == 0) {
+      // Call the tok_let function defined in the let.cpp file
+      tok_let(line, vars, is_debug);
+    } else if (line.find("print ") == 0) {
+      // Call the tok_print function defined in the print.cpp file
+      tok_print(line, vars, is_debug);
+    } else if (line.find("goto ") == 0) {
+      // Call the tok_goto function defined in the goto.cpp file
+      // Pass a reference to the code_lines and current_line variables
+      tok_goto(line, vars, code_lines, current_line, is_debug);
+      gotoed = true;
+    } else if (line.find("end") == 0) {
+      // Call the tok_end function defined in the end.cpp file
+      tok_end(line, is_debug);
     } else {
-      // Unknown command
-      cerr << "Error: Unknown command '" << tokens[0] << "'" << endl;
+      if (is_debug) {
+        std::cerr << "Error: Unknown command '" << line << "'" << std::endl;
+      }
+    }
+    // Increment the current_line variable unless it was set by the tok_goto
+    // function
+    if (!gotoed) {
+      current_line++;
     }
   }
 }
