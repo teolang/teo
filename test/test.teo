@@ -1,3 +1,9 @@
 let x 5;
 print x;
+
+let start 0;
+let end 10;
+let step 2;
+for start <= end step;
+print ;
 end;

@@ -14,6 +14,9 @@ extern void tok_print(const std::string &line,
                       const std::map<std::string, int> &vars,
                       const bool is_debug);
 extern void tok_end(const std::string &line, const bool is_debug);
+extern void tok_for(const std::string &line, const std::map<std::string, int> &vars,
+             const bool is_debug);
+
 
 // Definition of the interpret function
 void interpret(const std::vector<std::string> &code_lines, const bool is_debug) {
@@ -29,6 +32,8 @@ void interpret(const std::vector<std::string> &code_lines, const bool is_debug) 
     } else if (line.find("end") == 0) {
       // Call the tok_end function defined in the end.cpp file
       tok_end(line, is_debug);
+    }else if (line.find("for ") == 0) {
+      tok_for(line, vars, is_debug);
     } else {
       if (is_debug) {
         std::cerr << "Error: Unknown command '" << line << "'" << std::endl;
