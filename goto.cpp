@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <cstdio>
 #include <iostream>
 #include <map>
 #include <string>
@@ -13,4 +14,7 @@ void tok_goto(const std::string &line, std::map<std::string, int> &vars,
                       // The label was found in the code, so set the
                       // current_line variable to the line number of the label
   current_line = std::stoi(label);
+  if (is_debug) {
+    std::cout << "Going to line " << label << " : " << code_lines[std::stoi(label)] << std::endl;
+  }
 }
