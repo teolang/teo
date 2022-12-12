@@ -3,6 +3,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
+
+#include "codelistHandler.cpp"
+
 using namespace std;
 
 // Definition of the parse_file function
@@ -20,24 +23,7 @@ vector<string> parse_file(int argc, char *argv[], bool isDebug) {
           string samplecode = string((istreambuf_iterator<char>(infile)),
                                      istreambuf_iterator<char>());
           infile.close();
-          string buffer = "";
-          for (int i = 0; i < samplecode.length(); i++) {
-            if (samplecode[i] == ';') {
-              codelist.push_back(buffer);
-              buffer = "";
-            } else {
-              buffer = buffer + samplecode[i];
-              if (isDebug)
-                cout << buffer << endl;
-            }
-          }
-          // Remove escape character from new line
-          for (auto &line : codelist) {
-            line.erase(remove(line.begin(), line.end(), '\\'), line.end());
-          }
-          for (auto &line : codelist) {
-            line.erase(remove(line.begin(), line.end(), '\n'), line.end());
-          }
+          codelist = parsehandler(samplecode, isDebug);
         } else {
           // Failed to open the file
           cerr << "Error: Failed to open file '" << argv[i + 1] << "'" << endl;
