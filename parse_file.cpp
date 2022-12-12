@@ -14,6 +14,7 @@ vector<string> parse_file(int argc, char *argv[], bool isDebug) {
   bool fileSpecified = false;
   for (int i = 0; i < argc; i++) {
     if (string(argv[i]) == "--stdin") {
+        fileSpecified = true;
       // Read the code from stdin
       string samplecode =
           string((istreambuf_iterator<char>(cin)), istreambuf_iterator<char>());
