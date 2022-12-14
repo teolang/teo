@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 
+#include "assert.cpp"
 #include "end.cpp"
 #include "goto.cpp"
 #include "let.cpp"
@@ -31,6 +32,12 @@ void interpret(const std::vector<std::string> &code_lines,
       // Pass a reference to the code_lines and current_line variables
       tok_goto(line, vars, code_lines, current_line, is_debug);
       gotoed = true;
+    } else if (line.find("assert ") == 0) {
+      if (tok_assert(line, vars, is_debug) != -1) {
+        tok_goto("goto " + std::to_string(tok_assert(line, vars, is_debug)),
+                 vars, code_lines, current_line, is_debug);
+        gotoed = true;
+      }
     } else if (line.find("end") == 0) {
       // Call the tok_end function defined in the end.cpp file
       tok_end(line, is_debug);
