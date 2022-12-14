@@ -21,9 +21,14 @@ int tok_assert(const std::string &line, std::map<std::string, int> &vars,
   } else {
     if (vars.at(variable[0]) == vars.at(variable[1])) {
       if (is_debug) {
-        std::cout << "Going to line " << goifassert << std::endl;
+        std::cout << "Assertion success, running 'goto " << goifassert << "'"
+                  << std::endl;
       }
       return stoi(goifassert);
+    } else {
+      if (is_debug) {
+        std::cout << "Assertion failed" << std::endl;
+      }
     }
   }
   return -1;

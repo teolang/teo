@@ -13,6 +13,9 @@ void tok_goto(const std::string &line, std::map<std::string, int> &vars,
   int it = std::stoi(label);
   // Search for a line that starts with the label followed by a colon (":")
   if (it < code_lines.size()) {
+      if (is_debug) {
+          std::cout << "Going to line '" << label << "'" << std::endl;
+      }
     // If the line is found, set the current_line variable to the index of the line
     current_line = it - 1;
   } else {
