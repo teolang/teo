@@ -22,7 +22,10 @@ int main(int argc, char *argv[]) {
     cerr << "Error: No file specified or failed to parse file. Use the '--file' flag to specify a file to parse." << endl;
     return 1;
   }
-
+  if (isDebug){
+    const char *buildString = "Compiled at " __DATE__ ", " __TIME__ ".";
+    cout << buildString << endl;
+  }
   // Interpret the code in the file
   interpret(codelist, isDebug);
 
