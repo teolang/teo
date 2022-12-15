@@ -17,9 +17,6 @@ vector<string> parsehandler(string samplecode, bool isDebug) {
       buffer = "";
     } else {
       buffer = buffer + samplecode[i];
-      if (isDebug) {
-        cout << buffer << endl;
-      }
     }
   }
   return codelist;
