@@ -14,16 +14,12 @@ vector<string> parsehandler(string samplecode, bool isDebug) {
       buffer = "";
     } else {
       buffer = buffer + samplecode[i];
-      if (isDebug)
+      line.erase(remove(line.begin(), line.end(), '\\'), line.end());
+      line.erase(remove(line.begin(), line.end(), '\n'), line.end());
+      if (isDebug) {
         cout << buffer << endl;
+      }
     }
-  }
-  // Remove escape character from new line
-  for (auto &line : codelist) {
-    line.erase(remove(line.begin(), line.end(), '\\'), line.end());
-  }
-  for (auto &line : codelist) {
-    line.erase(remove(line.begin(), line.end(), '\n'), line.end());
   }
   return codelist;
 }
