@@ -17,6 +17,7 @@ int main(int argc, char *argv[]) {
   if (isDebug){
     const char *buildString = "Compiled at " __DATE__ ", " __TIME__ ".";
     cout << buildString << endl;
+    printf("Git ref: %s\n", VERSION);
   }
   // Check if the "--file" flag was provided
   vector<string> codelist = parse_file(argc, argv, isDebug);
