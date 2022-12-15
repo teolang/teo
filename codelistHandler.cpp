@@ -13,7 +13,7 @@ vector<string> parsehandler(string samplecode, bool isDebug) {
       buffer.erase(remove(buffer.begin(), buffer.end(), '\\'), buffer.end());
       buffer.erase(remove(buffer.begin(), buffer.end(), '\n'), buffer.end());
       codelist.push_back(buffer);
-      cout << ">> " << buffer << endl; << endl;
+      cout << ">> " << buffer << endl << endl;
       buffer = "";
     } else {
       buffer = buffer + samplecode[i];
