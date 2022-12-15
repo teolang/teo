@@ -10,12 +10,13 @@ vector<string> parsehandler(string samplecode, bool isDebug) {
   string buffer = "";
   for (int i = 0; i < samplecode.length(); i++) {
     if (samplecode[i] == ';') {
+      buffer.erase(remove(buffer.begin(), buffer.end(), '\\'), buffer.end());
+      buffer.erase(remove(buffer.begin(), buffer.end(), '\n'), buffer.end());
       codelist.push_back(buffer);
+      cout << ">> " << buffer << endl; << endl;
       buffer = "";
     } else {
       buffer = buffer + samplecode[i];
-      buffer.erase(remove(buffer.begin(), buffer.end(), '\\'), buffer.end());
-      buffer.erase(remove(buffer.begin(), buffer.end(), '\n'), buffer.end());
       if (isDebug) {
         cout << buffer << endl;
       }
