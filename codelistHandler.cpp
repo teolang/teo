@@ -14,8 +14,8 @@ vector<string> parsehandler(string samplecode, bool isDebug) {
       buffer = "";
     } else {
       buffer = buffer + samplecode[i];
-      buffer.erase(remove(line.begin(), line.end(), '\\'), line.end());
-      buffer.erase(remove(line.begin(), line.end(), '\n'), line.end());
+      buffer.erase(remove(buffer.begin(), buffer.end(), '\\'), buffer.end());
+      buffer.erase(remove(buffer.begin(), buffer.end(), '\n'), buffer.end());
       if (isDebug) {
         cout << buffer << endl;
       }
