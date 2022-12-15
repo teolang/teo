@@ -1,4 +1,4 @@
-GIT_VERSION := "$(shell git describe --abbrev=4 --dirty --always --tags)"
+GIT_VERSION := "$(shell git describe --abbrev=7 --dirty --always --tags)"
 all: clean main run
 
 main: $(wildcard $(SRC_DIR)/*.cpp,h)
