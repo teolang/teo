@@ -21,6 +21,7 @@ void interpret(const std::vector<std::string> &code_lines,
   while (current_line < code_lines.size()) {
     gotoed = false;
     const auto &line = code_lines[current_line];
+    std::cout << "Running " << line << endl;
     if (line.find("let ") == 0) {
       // Call the tok_let function defined in the let.cpp file
       tok_let(line, vars, is_debug);
