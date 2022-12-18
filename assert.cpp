@@ -2,8 +2,9 @@
 #include <map>
 #include <sstream>
 #include <string>
+#include "cparse/shunting-yard.h"
 
-int tok_assert(const std::string &line, std::map<std::string, int> &vars,
+int tok_assert(const std::string &line, cparse::TokenMap vars,
                const bool is_debug) {
   std::string commands = line.substr(7);
   std::stringstream ss(commands);
@@ -12,14 +13,8 @@ int tok_assert(const std::string &line, std::map<std::string, int> &vars,
   std::getline(ss, variable[0], ' ');
   std::getline(ss, variable[1], ' ');
   std::getline(ss, goifassert);
-  if (vars.find(variable[0]) == vars.end() ||
-      vars.find(variable[1]) == vars.end()) {
-    if (is_debug) {
-      std::cerr << "Error: Unknown variable '" << variable[0] << "'"
-                << std::endl;
-    }
-  } else {
-    if (vars.at(variable[0]) == vars.at(variable[1])) {
+
+    if (vars[variable[0]] == vars[variable[1]]) {
       if (is_debug) {
         std::cout << "Assertion success, running 'goto " << goifassert << "'"
                   << std::endl;
@@ -30,6 +25,5 @@ int tok_assert(const std::string &line, std::map<std::string, int> &vars,
         std::cout << "Assertion failed" << std::endl;
       }
     }
-  }
   return -1;
 }

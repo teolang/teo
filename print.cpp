@@ -1,3 +1,4 @@
+#include "cparse/shunting-yard.h"
 #include <iostream>
 #include <vector>
 #include <iterator>
@@ -6,7 +7,7 @@
 #include <string>
 
 // Definition of the tok_print function
-void tok_print(const std::string &line, const std::map<std::string, int> &vars,
+void tok_print(const std::string &line, cparse::TokenMap vars,
                const bool is_debug) {
   // Split the line into tokens
   std::istringstream iss(line);
@@ -21,15 +22,7 @@ void tok_print(const std::string &line, const std::map<std::string, int> &vars,
     return;
   }
 
-  // Check if the variable exists
-  if (vars.find(tokens[1]) == vars.end()) {
-    if (is_debug) {
-      std::cerr << "Error: Unknown variable '" << tokens[1] << "'" << std::endl;
-    }
-    return;
-  }
-
   // Print the variable
-  std::cout << vars.at(tokens[1]) << std::endl;
+  std::cout << vars[tokens[1]] << std::endl;
 }
 

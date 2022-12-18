@@ -8,8 +8,10 @@
 #include <vector>
 #include <iterator>
 
+#include "cparse/shunting-yard.h"
+
 // Definition of the tok_let function
-void tok_let(const std::string &line, std::map<std::string, int> &vars,
+void tok_let(const std::string &line, cparse::TokenMap vars,
              const bool is_debug) {
   // Split the line into tokens
   std::istringstream iss(line);
@@ -24,28 +26,12 @@ void tok_let(const std::string &line, std::map<std::string, int> &vars,
     return;
   }
 
-  // Check if the variable name is valid
-  if (tokens[1].find_first_not_of("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_") != std::string::npos) {
-    if (is_debug) {
-      std::cerr << "Error: Invalid variable name '" << tokens[1] << "'"
-                << std::endl;
-    }
-    return;
-  }
-
-  // Check if the value is an integer
-  if (tokens[2].find_first_not_of("0123456789") != std::string::npos) {
-    if (is_debug) {
-      std::cerr << "Error: Invalid value '" << tokens[2] << "'" << std::endl;
-    }
-    return;
-  }
-
+  auto calculated = cparse::calculator::calculate(tokens[2].c_str(), &vars);
   // Set the variable
-  vars[tokens[1]] = std::stoi(tokens[2]);
+  vars[tokens[1]] = calculated;
 
   if (is_debug) {
-    std::cout << "Variable '" << tokens[1] << "' set to " << tokens[2] << std::endl;
+    std::cout << "Variable '" << tokens[1] << "' set to " << calculated << std::endl;
   }
 }
 

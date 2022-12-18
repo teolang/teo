@@ -1,4 +1,4 @@
-let x 5;
+let x 5+2;
 let y 5;
 assert x y 4;
 print x;
