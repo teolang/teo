@@ -36,8 +36,8 @@ void interpret(const std::vector<std::string> &code_lines,
       tok_goto(line, code_lines, current_line, is_debug);
       gotoed = true;
     } else if (line.find("assert ") == 0) {
-      if (tok_assert(line, vars, is_debug) != -1) {
-        tok_goto("goto " + std::to_string(tok_assert(line, vars, is_debug)),
+      if (tok_if(line, vars, is_debug) != -1) {
+        tok_goto("goto " + std::to_string(tok_if(line, vars, is_debug)),
                  code_lines, current_line, is_debug);
         gotoed = true;
       }
