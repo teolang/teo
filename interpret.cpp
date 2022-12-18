@@ -33,12 +33,12 @@ void interpret(const std::vector<std::string> &code_lines,
     } else if (line.find("goto ") == 0) {
       // Call the tok_goto function defined in the goto.cpp file
       // Pass a reference to the code_lines and current_line variables
-      tok_goto(line, code_lines, current_line, is_debug);
+      tok_goto(line, code_lines, current_line, vars, is_debug);
       gotoed = true;
     } else if (line.find("assert ") == 0) {
       if (tok_if(line, vars, is_debug) != -1) {
         tok_goto("goto " + std::to_string(tok_if(line, vars, is_debug)),
-                 code_lines, current_line, is_debug);
+                 code_lines, current_line, vars, is_debug);
         gotoed = true;
       }
     } else if (line.find("end") == 0) {
