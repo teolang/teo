@@ -23,6 +23,6 @@ void tok_print(const std::string &line, cparse::TokenMap vars,
   }
 
   // Print the variable
-  std::cout << cparse::calculator::calculate(tokens[1].c_str(), &vars) << std::endl;
+  std::cout << cparse::calculator::calculate(tokens[1].c_str(), &vars).asDouble() << std::endl;
 }
 

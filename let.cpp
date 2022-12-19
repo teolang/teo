@@ -26,12 +26,12 @@ void tok_let(const std::string &line, cparse::TokenMap vars,
     return;
   }
 
-  auto calculated = cparse::calculator::calculate(tokens[2].c_str(), &vars);
+  
   // Set the variable
-  vars[tokens[1]] = calculated;
+  vars[tokens[1]] = cparse::calculator::calculate(tokens[2].c_str(), &vars).asDouble();
 
   if (is_debug) {
-    std::cout << "Variable '" << tokens[1] << "' set to " << calculated << std::endl;
+    std::cout << "Variable '" << tokens[1] << "' set to " << vars[tokens[1]] << std::endl;
   }
 }
 
