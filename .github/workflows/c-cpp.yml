@@ -18,4 +18,4 @@ jobs:
     - name: Install clang
       run: sudo apt-get install clang
     - name: Test
-      run: make run
+      run: make
