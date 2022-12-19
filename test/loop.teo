@@ -1,0 +1,4 @@
+let x 0;
+let x x+1;
+assert x < 10 2;
+print x;
