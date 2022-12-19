@@ -1,15 +1,16 @@
 GIT_VERSION := "$(shell git describe --abbrev=7 --dirty --always --tags)"
-all: clean prepare main run
+TARGET := main.cpp interpret.cpp parse_file.cpp
+all: run
 
-prepare:
+cparse/%.o:
 	make release -C cparse
 
-main: $(wildcard $(SRC_DIR)/*.cpp,h)
-	clang++ -I cparse main.cpp parse_file.cpp interpret.cpp cparse/builtin-features.o cparse/core-shunting-yard.o -o main -DVERSION=\"$(GIT_VERSION)\"
+main: $(TARGET) cparse/core-shunting-yard.o cparse/builtin-features.o
+	clang++ -I cparse $(TARGET) cparse/builtin-features.o cparse/core-shunting-yard.o -o main -DVERSION=\"$(GIT_VERSION)\"
 
-run: main test/test.teo test/loop.teo
+run: main test/test.teo test/loop.teo 
 	./main --file test/test.teo --debug
 	./main --file test/loop.teo --debug
 
 clean:
-	rm -f main
+	rm -f main cparse/*.o cparse/test-shunting-yard
