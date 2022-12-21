@@ -33,13 +33,11 @@ main: main.cpp $(COMMAND_LIST) $(UTILITIES) $(CPARSE_DEPENDENCIES)
 	@printf "\033[1;92mMaking   \033[1;93m>> \033[0mMain file\n"
 	clang++ -I cparse $(TARGET) $(CPARSE_DEPENDENCIES) -o main -DVERSION=\"$(GIT_VERSION)\"
 
-run: main test/test.teo test/loop.teo 
-	@printf "\033[1;92mTesting   \033[1;93m \033[0mtest.teo\n"
-	./main --file test/test.teo --debug
-	@printf "\033[1;92mTesting   \033[1;93m \033[0mloop.teo\n"
-	./main --file test/loop.teo --debug
-	@printf "\033[1;92mTesting   \033[1;93m \033[0mcircle.teo\n"
-	./main --file test/circle.teo --debug
+run: main
+	@printf "\033[1;92mRunning tests\033[1;93m...\033[0m\n"
+	for test in 1 2 3 ; do \
+		./main --test=$$test --debug; \
+	done
 
 clean:
 	rm -f main cparse/*.o cparse/test-shunting-yard

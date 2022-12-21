@@ -1,7 +1,0 @@
-let x 5;
-let x x+2;
-let y 5;
-assert x > y 5+1;
-print x;
-print y*2;
-end;
