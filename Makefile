@@ -23,16 +23,22 @@ verbose:
 	@printf " $(shell cat banner)\n"
 	@printf "\033[1;92mPLATFORM   \033[1;93m?| \033[0m$(PLATFORM)\n"
 	@printf "\033[1;96mARCH       \033[1;93m?| \033[0m$(ARCH)\n"
+	@printf "\n\n"
 
 cparse/%.o:
+	@printf "\033[1;92mMaking   \033[1;93m>> \033[0mCPARSE\n"
 	make release -C cparse
 
 main: main.cpp $(COMMAND_LIST) $(UTILITIES) $(CPARSE_DEPENDENCIES)
+	@printf "\033[1;92mMaking   \033[1;93m>> \033[0mMain file\n"
 	clang++ -I cparse $(TARGET) $(CPARSE_DEPENDENCIES) -o main -DVERSION=\"$(GIT_VERSION)\"
 
 run: main test/test.teo test/loop.teo 
+	@printf "\033[1;92mTesting   \033[1;93m \033[0mtest.teo\n"
 	./main --file test/test.teo --debug
+	@printf "\033[1;92mTesting   \033[1;93m \033[0mloop.teo\n"
 	./main --file test/loop.teo --debug
+	@printf "\033[1;92mTesting   \033[1;93m \033[0mcircle.teo\n"
 	./main --file test/circle.teo --debug
 
 clean:
