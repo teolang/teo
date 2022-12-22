@@ -23,5 +23,4 @@ jobs:
       if: runner.os == 'Windows'
       run: echo "PATH=$PATH:C:\msys64\mingw64\bin" >> $GITHUB_ENV
     - name: Build for ${{matrix.os}}
-      shell: bash
       run: make
