@@ -8,14 +8,31 @@ on:
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
 
     steps:
     - uses: actions/checkout@v3
       with:
         submodules: recursive
-    - name: Install clang
-      run: sudo apt-get install clang
-    - name: Test
-      run: make
+    - name: Set up GCC
+      uses: msys2/setup-msys2@v2
+      if: runner.os == 'Windows'
+    - name: Making CParse
+      shell: bash
+      run: make release -C cparse
+    - name: Building (Windows)
+      if: runner.os == 'Windows'
+      shell: bash
+      run: |
+        cmake -G "MinGW Makefiles" .
+        make
+    - name: Building (Linux)
+      if: runner.os != 'Windows'
+      shell: bash
+      run: |
+        cmake .
+        make
+
