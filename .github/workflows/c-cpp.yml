@@ -8,14 +8,25 @@ on:
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
 
     steps:
     - uses: actions/checkout@v3
       with:
         submodules: recursive
-    - name: Install clang
-      run: sudo apt-get install clang
-    - name: Test
-      run: make
+    - name: Add clang path to $PATH env
+      shell: bash
+      if: runner.os == 'Windows'
+      run: echo "PATH=$PATH:C:\msys64\mingw64\bin" >> $GITHUB_ENV
+    - name: Making CParse
+      shell: bash
+      run: make release -C cparse
+    - name: Building
+      shell: bash
+      run: |
+        mkdir build && cd build
+        cmake ..
+        make
