@@ -26,6 +26,7 @@ jobs:
     - name: Making CParse
       shell: bash
       run: make release -C cparse
+      if: matrix.language == 'cpp'
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
