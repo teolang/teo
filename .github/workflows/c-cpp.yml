@@ -35,4 +35,17 @@ jobs:
       run: |
         cmake . -B build
         cd build && make
+    - name: Archive Windows build
+      if: runner.os == 'Windows'
+      uses: actions/upload-artifact@v3
+      with:
+        name: Windows build
+        path: build/main.exe
+    - name: Archive Linux build
+      if: runner.os != 'Windows'
+      uses: actions/upload-artifact@v3
+      with:
+        name: Linux build
+        path: build/main
+        
 
