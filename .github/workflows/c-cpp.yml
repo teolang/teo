@@ -35,8 +35,4 @@ jobs:
       run: |
         cmake . -B build
         cd build && make
-    - uses: github/codeql-action/init@v2
-      with:
-        languages: cpp
-
 
