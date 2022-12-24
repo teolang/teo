@@ -27,12 +27,12 @@ jobs:
       if: runner.os == 'Windows'
       shell: bash
       run: |
-        cmake -G "MinGW Makefiles" .
-        make
+        cmake -G "MinGW Makefiles" . -B build
+        cd build && make
     - name: Building (Linux)
       if: runner.os != 'Windows'
       shell: bash
       run: |
-        cmake .
-        make
+        cmake . -B build
+        cd build && make
 
