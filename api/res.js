@@ -5,6 +5,16 @@ const { exec } = require('child_process'); // For running the `echo` command
 
 const app = express();
 
+var RateLimit = require('express-rate-limit');
+var limiter = new RateLimit({
+  windowMs: 1*60*1000, // 1 minute
+  max: 10
+});
+
+// apply rate limiter to all requests
+app.use(limiter);
+
+
 app.get('/echo', (req, res) => {
   // Get the query from the request
   const query = req.query.q.replace(/:/g, ';');
