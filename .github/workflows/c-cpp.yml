@@ -20,21 +20,24 @@ jobs:
     - name: Set up GCC
       uses: msys2/setup-msys2@v2
       if: runner.os == 'Windows'
+    - name: Get number of CPU cores
+      uses: SimenB/github-actions-cpu-cores@v1
+      id: cpu-cores
     - name: Making CParse
       shell: bash
-      run: make release -C cparse
+      run: make release -C cparse -j${{ steps.cpu-cores.outputs.count }}
     - name: Building (Windows)
       if: runner.os == 'Windows'
       shell: bash
       run: |
         cmake -G "MinGW Makefiles" . -B build
-        cd build && make
+        cd build && make -j${{ steps.cpu-cores.outputs.count }}
     - name: Building (Linux)
       if: runner.os != 'Windows'
       shell: bash
       run: |
         cmake . -B build
-        cd build && make
+        cd build && make -j${{ steps.cpu-cores.outputs.count }}
     - name: Archive Windows build
       if: runner.os == 'Windows'
       uses: actions/upload-artifact@v3
