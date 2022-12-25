@@ -23,29 +23,54 @@ jobs:
     - name: Get number of CPU cores
       uses: SimenB/github-actions-cpu-cores@v1
       id: cpu-cores
+    - name: Caching CParse
+      uses: actions/cache@v3
+      id: cparse-cache
+      with:
+        path: |
+          cparse/core-shunting-yard.o
+          cparse/builtin-features.o
+        key: cparse-${{ runner.os }}-${{ hashFiles('cparse/') }}
+    - name: Caching Build (Windows)
+      uses: actions/cache@v3
+      id: win-cache
+      with:
+        path: |
+          cparse/core-shunting-yard.o
+          cparse/builtin-features.o
+        key: cparse-${{ runner.os }}-${{ hashFiles('./') }}
+    - name: Caching Build (Linux)
+      uses: actions/cache@v3
+      id: linux-cache
+      with:
+        path: |
+          cparse/core-shunting-yard.o
+          cparse/builtin-features.o
+        key: cparse-${{ runner.os }}-${{ hashFiles('./') }}
     - name: Making CParse
       shell: bash
+      if: steps.cparse-cache.outputs.cache-hit != 'true'
       run: make release -C cparse -j${{ steps.cpu-cores.outputs.count }}
     - name: Building (Windows)
-      if: runner.os == 'Windows'
+      if: runner.os == 'Windows' && steps.win-cache.outputs.cache-hit != 'true'
       shell: bash
       run: |
         cmake -G "MinGW Makefiles" . -B build
         cd build && make -j${{ steps.cpu-cores.outputs.count }}
     - name: Building (Linux)
-      if: runner.os != 'Windows'
+      if: runner.os != 'Windows' && steps.linux-cache.outputs.cache-hit != 'true'
       shell: bash
       run: |
         cmake . -B build
         cd build && make -j${{ steps.cpu-cores.outputs.count }}
     - name: Archive Windows build
-      if: runner.os == 'Windows'
+      if: runner.os == 'Windows' && steps.win-cache.outputs.cache-hit != 'true'
       uses: actions/upload-artifact@v3
       with:
         name: Windows build
         path: build/main.exe
     - name: Archive Linux build
-      if: runner.os != 'Windows'
+      if: runner.os != 'Windows' && steps.linux-cache.outputs.cache-hit != 'true'
       uses: actions/upload-artifact@v3
       with:
         name: Linux build
