@@ -3,7 +3,7 @@ A programming language for kids designed to be fast and easy to learn.
 
 A submission for NSC 2023 by Chitsanupong Rongpan.
 
-<img src="./image.svg" width="75%"></img>
+<img src="./image.svg" width="100%"></img>
 
 ## Getting up and running
 - Download lastest CI Artifacts on Github CI
