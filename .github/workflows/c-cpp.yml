@@ -41,7 +41,7 @@ jobs:
         path: ./build/main
         key: cparse-${{ runner.os }}-${{ hashFiles('./*.cpp', './*.h', 'CMakeLists.txt') }}
     - name: Set up GCC
-      if: ${{ runner.os == 'Windows' && steps.cparse-cache.outputs.cache-hit != 'true' || steps.win-build-cache.outputs.cache-hit != 'true' }}
+      if: runner.os == 'Windows'
       uses: msys2/setup-msys2@v2
     - name: Get number of CPU cores
       if: ${{ steps.cparse-cache.outputs.cache-hit != 'true' || steps.win-build-cache.outputs.cache-hit != 'true'}}
