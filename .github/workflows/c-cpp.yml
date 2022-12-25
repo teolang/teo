@@ -38,12 +38,11 @@ jobs:
       if: steps.cparse-cache.outputs.cache-hit == 'true' && runner.os != 'Windows'
       id: linux-build-cache
       with:
-        path: ./build/main.exe
-
+        path: ./build/main
         key: cparse-${{ runner.os }}-${{ hashFiles('./*.cpp', './*.h', 'CMakeLists.txt') }}
     - name: Set up GCC
-      uses: msys2/setup-msys2@v2
       if: runner.os == 'Windows' && ${{ steps.cparse-cache.outputs.cache-hit != 'true' || steps.win-build-cache.outputs.cache-hit != 'true'}}
+      uses: msys2/setup-msys2@v2
     - name: Get number of CPU cores
       if: ${{ steps.cparse-cache.outputs.cache-hit != 'true' || steps.win-build-cache.outputs.cache-hit != 'true'}}
       uses: SimenB/github-actions-cpu-cores@v1
