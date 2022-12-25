@@ -5,7 +5,7 @@ A submission for NSC 2023 by Chitsanupong Rongpan.
 
 ## Getting up and running
 - Download lastest CI Artifacts on Github CI
-- or, [compile](#compiling-with-cmake) yourself with ```cmake```
+- or, [compile](#compiling-with-cmake) yourself with ```cmake``` (Recommended)
 
 ## Compiling with CMake
 Dependencies:
