@@ -1,7 +1,7 @@
 # Teo
 A programming language for kids designed to be fast and easy to learn.
 
-A submission for NSC 2022
+A submission for NSC 2023
 
 ## Getting up and running
 - Download lastest CI Artifacts on Github CI
