@@ -1,7 +1,7 @@
 # Teo
 A programming language for kids designed to be fast and easy to learn.
 
-A submission for NSC 2023 by Chitsanupong Rongpan.
+A submission for NSC 2023 by Chitsanupong Rongpan (ชิษณุพงษ์ รองปาน).
 
 <img src="./image.svg" width="100%"></img>
 
