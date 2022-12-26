@@ -25,26 +25,10 @@ jobs:
           cparse/core-shunting-yard.o
           cparse/builtin-features.o
         key: cparse-${{ runner.os }}-${{ hashFiles('cparse/') }}
-    - name: Caching Build (Windows)
-      uses: actions/cache@v3
-      if: steps.cparse-cache.outputs.cache-hit == 'true' && runner.os == 'Windows'
-      id: win-build-cache
-      with:
-        path: ./build/main.exe
-
-        key: cparse-${{ runner.os }}-${{ hashFiles('./*.cpp', './*.h', 'CMakeLists.txt') }}
-    - name: Caching Build (Linux)
-      uses: actions/cache@v3
-      if: steps.cparse-cache.outputs.cache-hit == 'true' && runner.os != 'Windows'
-      id: linux-build-cache
-      with:
-        path: ./build/main
-        key: cparse-${{ runner.os }}-${{ hashFiles('./*.cpp', './*.h', 'CMakeLists.txt') }}
     - name: Set up GCC
       if: runner.os == 'Windows'
       uses: msys2/setup-msys2@v2
     - name: Get number of CPU cores
-      if: ${{ steps.cparse-cache.outputs.cache-hit != 'true' || steps.win-build-cache.outputs.cache-hit != 'true'}}
       uses: SimenB/github-actions-cpu-cores@v1
       id: cpu-cores
     - name: Making CParse
@@ -52,13 +36,13 @@ jobs:
       if: steps.cparse-cache.outputs.cache-hit != 'true'
       run: make release -C cparse -j${{ steps.cpu-cores.outputs.count }}
     - name: Building (Windows)
-      if: runner.os == 'Windows' && steps.win-build-cache.outputs.cache-hit != 'true'
+      if: runner.os == 'Windows'
       shell: bash
       run: |
         cmake -G "MinGW Makefiles" . -B build
         cd build && make -j${{ steps.cpu-cores.outputs.count }}
     - name: Building (Linux)
-      if: runner.os != 'Windows' && steps.linux-build-cache.outputs.cache-hit != 'true'
+      if: runner.os != 'Windows'
       shell: bash
       run: |
         cmake . -B build
