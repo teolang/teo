@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
   vector<string> codelist = parse_file(argc, argv, isDebug);
   if (codelist.empty()) {
     // The "--file" flag was not provided or an error occurred while parsing the file
-    cerr << "Error: No file specified or failed to parse file. Use the '--file' flag to specify a file to parse." << endl;
+    cerr << "Error: File is empty!." << endl;
     return 1;
   }
   // Interpret the code in the file
