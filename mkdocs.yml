@@ -6,5 +6,8 @@ repo_name: 'teolang/teo'
 repo_url: 'https://github.com/teolang/teo'
 nav:
     - Home: index.md
+    - Documentation:
+      - Let: commands/let.md
+      - Print: commands/print.md
 theme:
   name: 'material'
