@@ -7,11 +7,11 @@
 #include <string>
 #include <vector>
 
-#include "assert.cpp"
-#include "end.cpp"
-#include "goto.cpp"
-#include "let.cpp"
-#include "print.cpp"
+#include "commands/assert.cpp"
+#include "commands/end.cpp"
+#include "commands/goto.cpp"
+#include "commands/let.cpp"
+#include "commands/print.cpp"
 
 #include "cparse/shunting-yard.h"
 

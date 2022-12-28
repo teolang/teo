@@ -8,7 +8,7 @@
 #include <vector>
 #include <iterator>
 
-#include "cparse/shunting-yard.h"
+#include "../cparse/shunting-yard.h"
 
 // Definition of the tok_let function
 void tok_let(const std::string &line, cparse::TokenMap vars,

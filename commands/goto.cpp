@@ -4,7 +4,7 @@
 #include <map>
 #include <string>
 #include <vector>
-#include "cparse/shunting-yard.h"
+#include "../cparse/shunting-yard.h"
 
 void tok_goto(const std::string &line,
               const std::vector<std::string> &code_lines, int &current_line, cparse::TokenMap vars,
