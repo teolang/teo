@@ -35,7 +35,7 @@ void interpret(const std::vector<std::string> &code_lines,
   commands["end"] = End;
   int current_line = 0;
   bool gotoed = false;
-  while (current_line < code_lines.size()) {
+  while (static_cast<std::vector<std::string>::size_type>(current_line) < code_lines.size()) {
     gotoed = false;
     const auto &line = code_lines[current_line];
     std::stringstream ss(line);
