@@ -12,7 +12,7 @@ void tok_goto(const std::string &line,
   // Extract the label specified after the "goto " keyword
   std::string label = line.substr(5);
   int it = cparse::calculator::calculate(label.c_str(), &vars).asInt();
-  if (it <= code_lines.size()) {
+  if (static_cast<std::vector<std::string>::size_type>(it) <= code_lines.size()) {
     if (is_debug) {
       std::cout << "Going to line '" << label << "'" << std::endl;
     }
