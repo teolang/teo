@@ -1,0 +1,10 @@
+site_name: TeoLang
+site_description: 'A programming language for kids to get started.'
+site_author: 'Teo team'
+docs_dir: docs/
+repo_name: 'teolang/teo'
+repo_url: 'https://github.com/teolang/teo'
+nav:
+    - Home: index.md
+theme:
+  name: 'material'
