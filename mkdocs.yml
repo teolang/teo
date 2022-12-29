@@ -4,6 +4,8 @@ site_author: 'Teo team'
 docs_dir: docs/
 repo_name: 'teolang/teo'
 repo_url: 'https://github.com/teolang/teo'
+plugins:
+  - social
 theme:
   name: 'material'
   features:
