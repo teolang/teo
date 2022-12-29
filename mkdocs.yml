@@ -9,5 +9,7 @@ plugins:
   - search
 theme:
   name: 'material'
+  icon:
+    logo: material/leaf-circle
   features:
     - content.code.annotate
