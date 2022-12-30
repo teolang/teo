@@ -25,9 +25,17 @@ jobs:
           cparse/core-shunting-yard.o
           cparse/builtin-features.o
         key: cparse-${{ runner.os }}-${{ hashFiles('cparse/') }}
-    - name: Set up GCC
+    - name: Set up GCC and GTK3
       if: runner.os == 'Windows'
       uses: msys2/setup-msys2@v2
+      with:
+        path-type: inherit
+        install: mingw-w64-x86_64-gtk3 mingw-w64-x86_64-toolchain base-devel
+    - name: Set up GTK3 (Linux)
+      if: runner.os != 'Windows'
+      shell: bash
+      run: |
+        sudo apt install libgtk-3-dev -y
     - name: Get number of CPU cores
       uses: SimenB/github-actions-cpu-cores@v1
       id: cpu-cores
@@ -37,10 +45,10 @@ jobs:
       run: make release -C cparse -j${{ steps.cpu-cores.outputs.count }}
     - name: Building (Windows)
       if: runner.os == 'Windows'
-      shell: bash
+      shell: msys2 {0}
       run: |
-        cmake -G "MinGW Makefiles" . -B build
-        cd build && make -j${{ steps.cpu-cores.outputs.count }}
+        cmake -G "Unix Makefiles" . -B build
+        cd build && make
     - name: Building (Linux)
       if: runner.os != 'Windows'
       shell: bash
