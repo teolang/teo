@@ -50,7 +50,7 @@ jobs:
       run: make release -C cparse -j${{ steps.cpu-cores.outputs.count }}
     - name: Building (Windows)
       if: runner.os == 'Windows'
-      shell: bash
+      shell: msys2 {0}
       run: |
         cmake -G "MinGW Makefiles" . -B build
         cd build && make -j${{ steps.cpu-cores.outputs.count }}
