@@ -19,10 +19,10 @@ end;
 
 ## Compiling with CMake
 Dependencies:
-- git
-- cmake
-- make
-- gcc (You can use clang by set the environment variable `CC="clang"` and `CXX="clang++"`
+- Git
+- CMake
+- Make
+- GNU Compiler Collection (You can use clang by set the environment variable `CC="clang"` and `CXX="clang++"`
 ``` bash
 git clone https://github.com/teolang/teo --depth=1 --recurse-submodules
 cd teo
