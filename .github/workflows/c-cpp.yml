@@ -31,11 +31,6 @@ jobs:
       with:
         path-type: inherit
         install: mingw-w64-x86_64-gtk3 mingw-w64-x86_64-toolchain base-devel
-    - name: Install PkgConfig
-      if: runner.os == 'Windows'
-      uses: crazy-max/ghaction-chocolatey@v2
-      with:
-        args: install pkgconfiglite --allow-empty-checksums
     - name: Set up GTK3 (Linux)
       if: runner.os != 'Windows'
       shell: bash
@@ -52,8 +47,8 @@ jobs:
       if: runner.os == 'Windows'
       shell: msys2 {0}
       run: |
-        cmake -G "MinGW Makefiles" . -B build
-        cd build && make -j${{ steps.cpu-cores.outputs.count }}
+        cmake -G "Unix Makefiles" . -B build
+        cd build && make
     - name: Building (Linux)
       if: runner.os != 'Windows'
       shell: bash
