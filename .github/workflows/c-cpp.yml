@@ -25,14 +25,11 @@ jobs:
           cparse/core-shunting-yard.o
           cparse/builtin-features.o
         key: cparse-${{ runner.os }}-${{ hashFiles('cparse/') }}
-    - name: Set up GCC
+    - name: Set up GCC and GTK3
       if: runner.os == 'Windows'
       uses: msys2/setup-msys2@v2
-    - name: Set up GTK3 (Windows)
-      if: runner.os == 'Windows'
-      shell: msys2 {0}
-      run: |
-        pacman -S mingw-w64-x86_64-gtk3 mingw-w64-x86_64-toolchain base-devel
+      with:
+        install: mingw-w64-x86_64-gtk3 mingw-w64-x86_64-toolchain base-devel
     - name: Set up GTK3 (Linux)
       if: runner.os != 'Windows'
       shell: bash
