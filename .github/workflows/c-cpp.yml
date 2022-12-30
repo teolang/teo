@@ -30,7 +30,12 @@ jobs:
       uses: msys2/setup-msys2@v2
       with:
         path-type: inherit
-        install: mingw-w64-x86_64-gtk3 mingw-w64-x86_64-toolchain base-devel mingw-w64-x86_64-cmake
+        install: mingw-w64-x86_64-gtk3 mingw-w64-x86_64-toolchain base-devel
+    - name: Install PkgConfig
+      if: runner.os == 'Windows'
+      uses: crazy-max/ghaction-chocolatey@v2
+      with:
+        args: install pkgconfiglite --allow-empty-checksums
     - name: Set up GTK3 (Linux)
       if: runner.os != 'Windows'
       shell: bash
