@@ -1,6 +1,6 @@
 #include <gtk/gtk.h>
 #include <string>
-#include "guihelper.cpp"
+#include "guihelper.h"
 #include <fstream>
 
 using namespace std;
@@ -74,7 +74,7 @@ void on_open_clicked() {
   }
 }
 
-int main(int argc, char *argv[]) {
+int startGUI(int argc, char *argv[]) {
   // Initialize GTK
   gtk_init(&argc, &argv);
 

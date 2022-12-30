@@ -1,8 +1,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "codelistHandler.cpp"
-#include "interpret.cpp" // include the header file for the interpret function
+#include "codelistHandler.h"
+#include "interpret.h" // include the header file for the interpret function
+#include "guihelper.h"
 using namespace std;
 
 int guihandler(string s) {
