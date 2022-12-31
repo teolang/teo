@@ -2,6 +2,7 @@ project(TeoLang)
 cmake_minimum_required(VERSION 3.25)
 execute_process(COMMAND cat ${CMAKE_CURRENT_LIST_DIR}/banner)
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 set(CMAKE_CXX_FLAGS "-Wall")
 
@@ -46,3 +47,4 @@ macro(logvar)
 endmacro()
 
 logvar()
+

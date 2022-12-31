@@ -49,23 +49,24 @@ jobs:
       run: |
         cmake -G "Unix Makefiles" . -B build
         cd build && make
+        ldd bin/main.exe | grep '\/mingw.*\.dll' -o | xargs -I{} cp "{}" ./bin
+        tar -cvf ../build.tar bin/
     - name: Building (Linux)
       if: runner.os != 'Windows'
       shell: bash
       run: |
         cmake . -B build
         cd build && make -j${{ steps.cpu-cores.outputs.count }}
+        tar -cvf ../build.tar *
     - name: Archive Windows build
       if: runner.os == 'Windows'
       uses: actions/upload-artifact@v3
       with:
         name: Windows build
-        path: build/main.exe
+        path: build.tar
     - name: Archive Linux build
       if: runner.os != 'Windows'
       uses: actions/upload-artifact@v3
       with:
         name: Linux build
-        path: build/main
-        
-
+        path: build.tar
