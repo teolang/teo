@@ -14,7 +14,8 @@ Dependencies:
 - Git
 - CMake
 - Make
-- GNU Compiler Collection (You can use CLANG+LLVM by set the environment variable `CC=clang` and `CXX=clang++`
+- GNU Compiler Collection (You can use CLANG+LLVM by set the environment variable `CC=clang` and `CXX=clang++`)
+- GTK3 (Runtime dependencies) [Windows users don't need to install this if they download from the CI Artifacts]
 ```bash
 git clone https://github.com/teolang/teo --depth=1 --recurse-submodules
 cd teo
