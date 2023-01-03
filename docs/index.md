@@ -1,6 +1,10 @@
 # Teo language
-A programming language for kids who want to get started!
-<img src="./image.svg" width="100%"></img>
+<img align="left" src="./image.svg" width="60%"></img>
+A programming language for kids designed to be fast and easy to learn.
+
+Teo is an easy-to-learn programming language for children.
+Because there are so many concepts and commands to master, I believe it is difficult to learn the concept of programming.
+Abstraction is wonderful, but it may be the source of much confusion for newcomers because it demands them to think about the system at a high level. In some circumstances, reducing abstraction can help beginners understand better.
 ## Some examples:
 ```
 let x 5;
