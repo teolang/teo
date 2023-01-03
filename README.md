@@ -1,7 +1,7 @@
 <p align="center">
   <a href="https://teolang.github.io/teo">
     <picture>
-      <img src="./logo.png" height="128">
+      <img src="./logo.svg" height="128">
     </picture>
     <h1 align="center">Teo</h1>
   </a>
