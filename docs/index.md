@@ -14,7 +14,7 @@ end;
 ```
 
 ## Getting up and running
-- Download lastest CI Artifacts on Github CI
+- Download lastest [CI Artifacts](https://github.com/teolang/teo/actions/workflows/c-cpp.yml) on Github CI
 - or, [compile](#compiling-with-cmake) yourself with ```cmake``` (Recommended)
 
 ## Compiling with CMake
