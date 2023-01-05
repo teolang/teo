@@ -1,4 +1,4 @@
-# Teo language
+# Teo
 <img align="left" src="./image.svg" width="60%"></img>
 A programming language for kids designed to be fast and easy to learn.
 
